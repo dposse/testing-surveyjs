@@ -429,6 +429,5 @@
      }
     ],
     "showQuestionNumbers": "off",
-    "showProgressBar": "top",
-    "progressBarType": "questions"
+    "showProgressBar": "top"
    }
