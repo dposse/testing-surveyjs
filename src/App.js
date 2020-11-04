@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 
+import * as Survey from "survey-react";
+import "survey-react/survey.css";
+
 function App() {
   return (
     <div className="App">
@@ -9,17 +12,449 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <IndividualSurvey />
     </div>
   );
 }
 
 export default App;
+
+
+
+const IndividualSurvey = () => {
+  return (
+    <Survey.Survey json={{
+      "title": "BORROWER INFORMATION FORM",
+      "description": "The purpose of this form is to collect identifying information about the applicant, loan request,\nindebtedness, information about the principals, information about current or previous government\nfinancing, and certain other disclosures. The information also facilitates background checks as\nauthorized by Section 7(a)(1)(B) of the Small Business Act, 15 U.S.C. 636(a)(1)(B). This form is to be\ncompleted by the Small Business Applicant and submitted to an SBA Participating Lender.",
+      "pages": [
+       {
+        "name": "page1",
+        "elements": [
+         {
+          "type": "multipletext",
+          "name": "General Information",
+          "title": "General Information",
+          "isRequired": true,
+          "items": [
+           {
+            "name": "NAME OF BUSINESS APPLYING FOR LOAN (“APPLICANT”):",
+            "title": "NAME OF BUSINESS APPLYING FOR LOAN (“APPLICANT”):"
+           },
+           {
+            "name": "YOUR NAME:",
+            "title": "YOUR NAME:"
+           },
+           {
+            "name": "TITLE:",
+            "title": "TITLE:"
+           },
+           {
+            "name": "SOCIAL SECURITY NUMBER:",
+            "title": "SOCIAL SECURITY NUMBER: "
+           },
+           {
+            "name": "DATE OF BIRTH:",
+            "title": " DATE OF BIRTH:"
+           },
+           {
+            "name": "PLACE OF BIRTH (City & State or Foreign Country):",
+            "title": "PLACE OF BIRTH (City & State or Foreign Country):"
+           }
+          ]
+         },
+         {
+          "type": "matrixdynamic",
+          "name": "Owner Information",
+          "title": "Owner Information",
+          "description": "List proprietors, partners, officers,\ndirectors, all holders of outstanding stock.\n100% of ownership must be shown.\n\nThe gender/race/ethnicity/veteran data is collected for program reporting purposes only. Disclosure is voluntary and\nhas no bearing on the credit decision.",
+          "isRequired": true,
+          "columns": [
+           {
+            "name": "Owner",
+            "cellType": "text",
+            "isRequired": true
+           },
+           {
+            "name": "% Owned",
+            "cellType": "text",
+            "isRequired": true
+           },
+           {
+            "name": "Veteran",
+            "cellType": "dropdown"
+           },
+           {
+            "name": "Gender",
+            "cellType": "dropdown",
+            "choices": [
+             {
+              "value": "M",
+              "text": "Male"
+             },
+             {
+              "value": "F",
+              "text": "Female"
+             },
+             {
+              "value": "N",
+              "text": "Not Disclosed"
+             }
+            ]
+           },
+           {
+            "name": "Race",
+            "cellType": "checkbox",
+            "choices": [
+             {
+              "value": "1",
+              "text": "American Indian or Alaska Native"
+             },
+             {
+              "value": "2",
+              "text": "Asian"
+             },
+             {
+              "value": "3",
+              "text": "Black or African-American"
+             },
+             {
+              "value": "4",
+              "text": "Native Hawaiian or Pacific Islander"
+             },
+             {
+              "value": "5",
+              "text": "White"
+             },
+             {
+              "value": "X",
+              "text": "Not Disclosed"
+             }
+            ]
+           },
+           {
+            "name": "Ethnicity",
+            "cellType": "dropdown",
+            "choices": [
+             {
+              "value": "H",
+              "text": "Hispanic or Latino"
+             },
+             {
+              "value": "N",
+              "text": "Not Hispanic or Latino"
+             },
+             {
+              "value": "Y",
+              "text": "Not Disclosed"
+             }
+            ]
+           }
+          ],
+          "choices": [
+           {
+            "value": "1",
+            "text": "Non-Veteran"
+           },
+           {
+            "value": 2,
+            "text": "Veteran-Other"
+           },
+           {
+            "value": 3,
+            "text": "Service-Disabled Veteran"
+           },
+           {
+            "value": 4,
+            "text": "Not Disclosed"
+           }
+          ],
+          "rowCount": 1,
+          "minRowCount": 1
+         },
+         {
+          "type": "boolean",
+          "name": "question1",
+          "title": "(1) Are you presently subject to an indictment, criminal information, arraignment, or other means by which formal\ncriminal charges are brought in any jurisdiction?",
+          "isRequired": true,
+          "validators": [
+           {
+            "type": "expression",
+            "text": "If “YES” to Question 1, the loan request is ineligible for SBA assistance.",
+            "expression": "{question1} <> true"
+           }
+          ]
+         },
+         {
+          "type": "boolean",
+          "name": "question2",
+          "title": "(2) Have you been arrested in the past six months for any criminal offense?",
+          "description": "If there is a “YES” response to\nQuestion 2 or 3, you must complete SBA Form 912 and furnish details on a separate sheet, including dates,\nlocation, fines, sentences, whether misdemeanor or felony, dates of parole/probation, unpaid fines or penalties,\nname(s) under which charged, and any other pertinent information. If “YES” to Questions 2 or 3, the lender\nwill be required to conduct a background check and make a character determination in accordance with the\nprocedures described in SOP 50 10 5.",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question3",
+          "title": "(3) For any criminal offense – other than a minor vehicle violation – have you ever: 1) been convicted; 2) plead guilty; 3) plead nolo contendere; 4) been placed on pretrial diversion; or 5) been placed on any form of parole or probation (including probation before judgment)?",
+          "description": "If there is a “YES” response toQuestion 2 or 3, you must complete SBA Form 912 and furnish details on a separate sheet, including dates,location, fines, sentences, whether misdemeanor or felony, dates of parole/probation, unpaid fines or penalties,name(s) under which charged, and any other pertinent information. If “YES” to Questions 2 or 3, the lenderwill be required to conduct a background check and make a character determination in accordance with theprocedures described in SOP 50 10 5. If “YES” to Question 3 and you are currently on parole or probation (including probation before judgment), the loan request is ineligible for SBA assistance. If the charge resulting in a “YES” was a single misdemeanor that was subsequently dropped without prosecution, you must provide documentation from the appropriate court or prosecutor’s office along with the completed Form 912. ",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question4",
+          "title": "(4) Has an application for the loan you are applying for now ever been submitted to SBA or to a Certified Development Company or lender in connection with any SBA program?",
+          "description": "If “YES” to Questions 4, 5 or 6, this application may not be submitted to SBA under any delegated or expedited processing method, but must be submitted to the Standard 7(a) Loan Guaranty Processing Center (LGPC) for non-delegated processing. The only exception is an application that was declined under a 7(a) Small Loan due to the applicant’s credit score may be submitted under SBA Express procedures. Note: This does not mean that your loan will be denied, only that your lender will need to use different SBA procedures to process the loan.",
+          "isRequired": true
+         }
+        ]
+       },
+       {
+        "name": "page2",
+        "elements": [
+         {
+          "type": "boolean",
+          "name": "question5",
+          "title": "(5) Are you presently debarred, suspended, proposed for debarment, declared ineligible, or voluntarily excluded from participation in this transaction by any Federal department or agency?",
+          "description": "If “YES” to Questions 4, 5 or 6, this application may not be submitted to SBA under any delegated or\nexpedited processing method, but must be submitted to the Standard 7(a) Loan Guaranty Processing Center\n(LGPC) for non-delegated processing. The only exception is an application that was declined under a 7(a)\nSmall Loan due to the applicant’s credit score may be submitted under SBA Express procedures. Note: This\ndoes not mean that your loan will be denied, only that your lender will need to use different SBA procedures\nto process the loan.",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question6",
+          "title": "(6) If you are at least a 50% or more owner of the applicant business, are you more than 60 days delinquent on any obligation to pay child support arising under an administrative order, court order, repayment agreement between the holder and a custodial parent, or repayment agreement between the holder and a state agency providing child support enforcement services?",
+          "description": "If “YES” to Questions 4, 5 or 6, this application may not be submitted to SBA under any delegated or\nexpedited processing method, but must be submitted to the Standard 7(a) Loan Guaranty Processing Center\n(LGPC) for non-delegated processing. The only exception is an application that was declined under a 7(a)\nSmall Loan due to the applicant’s credit score may be submitted under SBA Express procedures. Note: This\ndoes not mean that your loan will be denied, only that your lender will need to use different SBA procedures\nto process the loan.",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question7",
+          "title": "(7) Are you a U.S. Citizen?",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question7a",
+          "visible": false,
+          "visibleIf": "{question7} = false",
+          "title": "If “No,” are you a Lawful Permanent resident alien?",
+          "requiredIf": "{question7} = false"
+         },
+         {
+          "type": "text",
+          "name": "question7b",
+          "visible": false,
+          "visibleIf": "{question7a} = true",
+          "title": "Provide Alien Registration Number",
+          "requiredIf": "{question7a} = true"
+         },
+         {
+          "type": "boolean",
+          "name": "question8",
+          "title": "(8) Are any of your business’ products or services exported or do you plan to begin exporting as a result of this loan?",
+          "isRequired": true
+         },
+         {
+          "type": "text",
+          "name": "question8a",
+          "visible": false,
+          "visibleIf": "{question8} = true",
+          "title": "If “”Yes,” provide the estimated total export sales this loan will support: $",
+          "requiredIf": "{question8} = true",
+          "inputType": "number",
+          "min": "0"
+         },
+         {
+          "type": "boolean",
+          "name": "question9",
+          "title": "(9) Is your business a franchise?",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question10",
+          "title": "(10) Does the Applicant business have any Affiliates?",
+          "description": "Affiliation exists when one individual or entity controls or has the power to control another or when a third\nparty or parties control or have the power to control both. SBA considers factors such as ownership,\nmanagement previous relationships with or ties to another entity, and contractual relationships when\ndetermining whether affiliation exists. The complete definition of affiliation is found at 13 CFR 121.103. (See\nalso, 13 CFR 121.107 and 121.301.) An “Affiliate” includes, for example: (1) a parent company; (2)\nsubsidiaries and other companies that are owned or controlled by the Applicant; (3) companies in which an\nofficer, director, general partner, managing member or party owning 20% or more is also an officer, director,\ngeneral partner, managing member or 20% or greater owner of the Applicant; (4) companies or individuals with\nunexercised options to own 50% or more of the Applicant’s stock; and (5) companies that have entered into\nagreements to merge with the Applicant.\n If answered “yes,” attach a listing of all Affiliates to this form.",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question11",
+          "title": "(11) Have you, the Applicant, its Affiliates, or any business owned or controlled by you or any Associate ever obtained a direct or guaranteed loan from SBA or any other Federal agency or been a guarantor on such a loan? (This includes student loans and disaster loans.)",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question11a",
+          "visible": false,
+          "visibleIf": "{question11} = true",
+          "title": "(a) If you answered “Yes” to Question 11, is any of the financing currently delinquent?",
+          "requiredIf": "{question11} = true"
+         },
+         {
+          "type": "boolean",
+          "name": "question11b",
+          "visible": false,
+          "visibleIf": "{question11} = true",
+          "title": "(b) If you answered “Yes” to Question 11, did any of this financing ever default and cause a  loss to the Government?",
+          "requiredIf": "{question11} = true"
+         },
+         {
+          "type": "text",
+          "name": "question12",
+          "title": "(12) What is the existing number of employees currently employed by the business?",
+          "isRequired": true,
+          "inputType": "number",
+          "min": "0",
+          "step": 1
+         },
+         {
+          "type": "multipletext",
+          "name": "question13",
+          "title": "(13)",
+          "items": [
+           {
+            "name": "text1",
+            "isRequired": true,
+            "inputType": "number",
+            "title": "Number of jobs to be created as a result of the loan?"
+           },
+           {
+            "name": "text2",
+            "isRequired": true,
+            "inputType": "number",
+            "title": "Number of jobs that will be retained as a result of the loan that would have been lost otherwise?"
+           }
+          ]
+         },
+         {
+          "type": "boolean",
+          "name": "question14",
+          "title": "(14) Have you or the Applicant used (or intend to use) a packager, broker, accountant, lawyer, etc.to assist in (a) preparing the loan application or any related materials and/or (b) referring the loan to the lender?",
+          "description": "If answer is “Yes,” a SBA Form 159 7(a) will need to be completed by the Applicant and the lender.",
+          "isRequired": true
+         }
+        ]
+       },
+       {
+        "name": "page3",
+        "elements": [
+         {
+          "type": "boolean",
+          "name": "question15",
+          "title": "(15) Will more than $10,000 of the loan proceeds be used for construction?",
+          "description": "If answer is “Yes,” a SBA Form 601 will need to be completed.",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question16",
+          "title": "(16) Are any of the Applicant’s revenues derived from gambling or from the sale of products or services, or the presentation of any depiction, displays or live performances, of a prurient sexual nature?",
+          "isRequired": true
+         },
+         {
+          "type": "boolean",
+          "name": "question17",
+          "title": "(17) Is the loan request for a Community Advantage Pilot Program loan?",
+          "description": "If answer is “Yes,” a SBA Form 2449, Community Advantage Addendum will need to be completed.",
+          "isRequired": true
+         },
+         {
+          "type": "html",
+          "name": "COI notice",
+          "html": "<p>SBA may not provide financial assistance to an applicant where there is any appearance of a conflict of interest with\nan SBA or other governmental employee. If any of the questions below are answered “False”, this application may\nnot be submitted under any delegated or expedited processing method, but must be submitted to the LGPC for nondelegated processing. Note: This does not mean that your loan will be denied, only that your lender will need to use\ndifferent SBA procedures to process the loan.</p>\n<p>* A “household member” of an SBA employee includes: a) the spouse of the SBA employee; b) the minor children\nof said individual; and c) the blood relatives of the employee, and the blood relatives of the employee’s spouse\nwho reside in the same place of abode as the employee.[13 CFR 105.201(d)] \n</p>"
+         },
+         {
+          "type": "boolean",
+          "name": "question18",
+          "title": "(18) No SBA employee, or the household member (see definition at * below) of an SBA employee, is a sole proprietor, partner, officer, director, or stockholder with a 10 percent or more interest, of the Applicant. [13 CFR 105.204]",
+          "isRequired": true,
+          "labelTrue": "True",
+          "labelFalse": "False"
+         },
+         {
+          "type": "boolean",
+          "name": "question19",
+          "title": "(19) No former SBA employee, who has been separated from SBA for less than one year prior to the request for financial assistance, is an employee, owner, partner, attorney, agent, owner of stock, officer, director, creditor or debtor of the Applicant. [13 CFR 105.203]",
+          "isRequired": true,
+          "labelTrue": "True",
+          "labelFalse": "False"
+         },
+         {
+          "type": "boolean",
+          "name": "question20",
+          "title": "(20) No member of Congress, or an appointed official or employee of the legislative or judicial branch of the Federal Government, is a sole proprietor, general partner, officer, director, or stockholder with a 10 percent or more interest, or household member of such individual, of the Applicant.  [13 CFR 105.301(c)]",
+          "isRequired": true,
+          "labelTrue": "True",
+          "labelFalse": "False"
+         },
+         {
+          "type": "boolean",
+          "name": "question21",
+          "title": "(21) No Government employee having a grade of at least GS-13 or higher is a sole proprietor, general partner, officer, director, or stockholder with a 10 percent or more interest, or a household member of such individual, of the Applicant. [13 CFR 105.301(a)]",
+          "isRequired": true,
+          "labelTrue": "True",
+          "labelFalse": "False"
+         },
+         {
+          "type": "boolean",
+          "name": "question22",
+          "title": "(22) No member or employee of a Small Business Advisory Council or a SCORE volunteer is a sole proprietor, general partner, officer, director, or stockholder with a 10 percent or more interest, or a household member of such individual, of the Applicant. [13 CFR 105.302(a)] ",
+          "isRequired": true,
+          "labelTrue": "True",
+          "labelFalse": "False"
+         }
+        ]
+       },
+       {
+        "name": "page4",
+        "elements": [
+         {
+          "type": "html",
+          "name": "page4 restrictions",
+          "html": "<p><b>Please read the following restrictions regarding use of federal financial assistance programs. If you\nunderstand them fully and agree to them, sign your name at the end of this document.</b></p>\n\n<p>\nSBA is required to withhold or limit financial assistance, to impose special conditions on approved loans, to provide special\nnotices to applicants or borrowers and to require special reports and data from borrowers in order to comply with legislation\npassed by the Congress and Executive Orders issued by the President and by the provisions of various inter-agency agreements.\nSBA has issued regulations and procedures that implement these laws and executive orders. These are contained in Parts 112,\n113, and 117 of Title 13 of the Code of Federal Regulations and in Standard Operating Procedures.\n</p>\n<p>\n<b>Privacy Act (5 U.S.C. 552a) --</b> Any person can request to see or get copies of any personal information that SBA has in his or\nher file when that file is retrieved by individual identifiers such as name or social security numbers. Requests for information\nabout another party may be denied unless SBA has the written permission of the individual to release the information to the\nrequestor or unless the information is subject to disclosure under the Freedom of Information Act.\n</p>\n<p>\nUnder the provisions of the Privacy Act, you are not required to provide your social security number. Failure to provide your\nsocial security number may not affect any right, benefit or privilege to which you are entitled. Disclosures of name and other\npersonal identifiers are, however, required for a benefit, as SBA requires an individual seeking assistance from SBA to provide it\nwith sufficient information for it to make a character determination. In determining whether an individual is of good character,\nSBA considers the person’s integrity, candor, and disposition toward criminal actions. Additionally, SBA is specifically\nauthorized to verify your criminal history, or lack thereof, pursuant to section 7(a)(1)(B), 15 USC Section 636(a)(1)(B) of the\nSmall Business Act ( the Act). Further, for all forms of assistance, SBA is authorized to make all investigations necessary to\nensure that a person has not engaged in acts that violate or will violate the Act or the Small Business Investment Act, 15 USC\nSections 634(b)(11) and 687(b)(a), respectively. For these purposes, you are asked to voluntarily provide your social security\nnumber to assist SBA in making a character determination and to distinguish you from other individuals with the same or similar\nname or other personal identifier.\n</p>\n<p>\nThe Privacy Act authorizes SBA to make certain “routine uses” of information protected by that Act. One such routine use is the\ndisclosure of information maintained in SBA’s investigative files system of records when this information indicates a violation\nor potential violation of law, whether civil, criminal, or administrative in nature. Specifically, SBA may refer the information to\nthe appropriate agency, whether Federal, State, local or foreign, charged with responsibility for, or otherwise involved in\ninvestigation, prosecution, enforcement or prevention of such violations. Another routine use is disclosure to other Federal\nagencies conducting background checks; only to the extent the information is relevant to the requesting agencies' function. See,\n74 F.R. 14890 (2009), and as amended from time to time for additional background and other routine uses.\n</p>\n<p>\n<b>Right to Financial Privacy Act of 1978 (12 U.S.C. 3401) --</b> This is notice to you as required by the Right to Financial Privacy\nAct of 1978, of SBA's access rights to financial records held by financial institutions that are or have been doing business with\nyou or your business, including any financial institutions participating in a loan or loan guaranty. The law provides that SBA\nshall have a right of access to your financial records in connection with its consideration or administration of assistance to you in\nthe form of a Government guaranteed loan. SBA is required to provide a certificate of its compliance with the Act to a financial\ninstitution in connection with its first request for access to your financial records, after which no further certification is required\nfor subsequent accesses. The law also provides that SBA's access rights continue for the term of any approved loan guaranty\nagreement. No further notice to you of SBA's access rights is required during the term of any such agreement. The law also\nauthorizes SBA to transfer to another Government authority any financial records included in an application for a loan, or\nconcerning an approved loan or loan guarantee, as necessary to process, service or foreclose on a loan guaranty or collect on a\ndefaulted loan guaranty.\n</p>\n<p>\n<b>Freedom of Information Act (5 U.S.C. 552) --</b> This law provides, with some exceptions, that SBA must supply information\nreflected in agency files and records to a person requesting it. Information about approved loans that will be automatically\nreleased includes, among other things, statistics on our loan programs (individual borrowers are not identified in the statistics)\nand other information such as the names of the borrowers (and their officers, directors, stockholders or partners), the collateral\npledged to secure the loan, the amount of the loan, its purpose in general terms and the maturity. Proprietary data on a borrower\nwould not routinely be made available to third parties. All requests under this Act are to be addressed to the nearest SBA office\nand be identified as a Freedom of Information request.\n</p>\n<p>\n<b>Flood Disaster Protection Act (42 U.S.C. 4011) --</b> Regulations have been issued by the Federal Insurance Administration (FIA)\nand by SBA implementing this Act and its amendments. These regulations prohibit SBA from making certain loans in an FIA\ndesignated floodplain unless Federal Flood insurance is purchased as a condition of the loan. Failure to maintain the required\nlevel of flood insurance makes the applicant ineligible for any financial assistance from SBA, including disaster assistance.\n</p>"
+         }
+        ]
+       },
+       {
+        "name": "page5",
+        "elements": [
+         {
+          "type": "html",
+          "name": "page5 regulations",
+          "html": "<p>\n<b>Executive Orders -- Floodplain Management and Wetland Protection (42 F.R. 26951 and 42 F.R. 26961) --</b> SBA\ndiscourages settlement in or development of a floodplain or a wetland. This statement is to notify all SBA loan applicants that\nsuch actions are hazardous to both life and property and should be avoided. The additional cost of flood preventive construction\nmust be considered in addition to the possible loss of all assets and investments due to a future flood.\n</p>\n<p>\n<b>Occupational Safety and Health Act (15 U.S.C. 651 et seq.) --</b> This legislation authorizes the Occupational Safety and Health\nAdministration in the Department of Labor to require businesses to modify facilities and procedures to protect employees or pay\npenalty fees. Businesses can be forced to cease operations or be prevented from starting operations in a new facility. Therefore,\nSBA may require additional information from an applicant to determine whether the business will be in compliance with OSHA\nregulations and allowed to operate its facility after the loan is approved and disbursed. Signing this form as an applicant is\ncertification that the OSHA requirements that apply to the applicant business have been determined and that the applicant, to the\nbest of its knowledge, is in compliance. Furthermore, applicant certifies that it will remain in compliance during the life of the\nloan. \n</p>\n<p>\n<b>Civil Rights Legislation (13 C.F.R. 112, 113, 117) --</b> All businesses receiving SBA financial assistance must agree not to\ndiscriminate in any business practice, including employment practices and services to the public on the basis of categories cited\nin 13 C.F.R., Parts 112, 113, and 117 of SBA Regulations. This includes making their goods and services available to\nhandicapped clients or customers. All business borrowers will be required to display the \"Equal Employment Opportunity\nPoster\" prescribed by SBA.\n</p>\n<p>\n<b>Equal Credit Opportunity Act (15 U.S.C. 1691) --</b> The Federal Equal Credit Opportunity Act prohibits creditors from\ndiscriminating against credit applicants on the basis of race, color, religion, national origin, sex, marital status or age (provided\nthe applicant has the capacity to enter into a binding contract); because all or part of the applicant's income derives from any\npublic assistance program, or because the applicant has in good faith exercised any right under the Consumer Credit Protection\nAct. \n</p>\n<p>\n<b>Executive Order 11738 -- Environmental Protection (38 F.R. 251621) --</b> The Executive Order charges SBA with\nadministering its loan programs in a manner that will result in effective enforcement of the Clean Air Act, the Federal Water\nPollution Act and other environment protection legislation.\n</p>\n<p>\n<b>Debt Collection Act of 1982, Deficit Reduction Act of 1984 (31 U.S.C. 3701 et seq. and other titles) --</b> These laws require\nSBA to collect aggressively any loan payments which become delinquent. SBA must obtain your taxpayer identification number\nwhen you apply for a loan. If you receive a loan, and do not make payments as they come due, SBA may take one or more of\nthe following actions: (1) report the status of your loan(s) to credit bureaus, (2) hire a collection agency to collect your loan, (3)\noffset your income tax refund or other amounts due to you from the Federal Government, (4) suspend or debar you or your\ncompany from doing business with the Federal Government, (5) refer your loan to the Department of Justice or other attorneys\nfor litigation, or (6) foreclose on collateral or take other action permitted in the loan instruments.\n</p>\n<p>\n<b>Immigration Reform and Control Act of 1986 (Pub. L. 99-603) --</b> If you are an alien who was in this country illegally since\nbefore January 1, 1982, you may have been granted lawful temporary resident status by the United States Immigration and\nNaturalization Service pursuant to the Immigration Reform and Control Act of 1986. For five years from the date you are\ngranted such status, you are not eligible for financial assistance from the SBA in the form of a loan guaranty under Section 7(a)\nof the Small Business Act unless you are disabled or a Cuban or Haitian entrant. When you sign this document, you are making\nthe certification that the Immigration Reform and Control Act of 1986 does not apply to you, or if it does apply, more than five\nyears have elapsed since you have been granted lawful temporary resident status pursuant to such 1986 legislation.\n</p>\n<p>\n<b>Lead-Based Paint Poisoning Prevention Act (42 U.S.C. 4821 et seq.)</b>\nBorrowers using SBA funds for the construction or rehabilitation of a residential structure are prohibited from using lead-based\npaint (as defined in SBA regulations) on all interior surfaces, whether accessible or not, and exterior surfaces, such as stairs,\ndecks, porches, railings, windows and doors, which are readily accessible to children under 7 years of age. A \"residential\nstructure\" is any home, apartment, hotel, motel, orphanage, boarding school, dormitory, day care center, extended care facility,\ncollege or other school housing, hospital, group practice or community facility and all other residential or institutional structures\nwhere persons reside.\n</p>\n<p>\n<b>Executive Order 12549, Debarment and Suspension (13 C.F.R. 145) --</b> The prospective lower tier participant certifies, by\nsubmission of this loan application, that neither it nor its principals are presently debarred, suspended, proposed for debarment,\ndeclared ineligible, or voluntarily excluded from participation in this transaction by any Federal department or agency. Where\nthe prospective lower tier participant is unable to certify to any of the statements in this certification, such prospective\nparticipants shall attach an explanation to the loan application.\n</p>"
+         }
+        ]
+       },
+       {
+        "name": "page6",
+        "elements": [
+         {
+          "type": "html",
+          "name": "Signature notes",
+          "html": "<p>\n<b><u>By Signing Below, You Make the Following Representations, Authorizations and Certifications</u></b>\n</p>\n<p>\n<b><u>REPRESENTATIONS AND AUTHORIZATIONS:</u></b> I represent that I have read the items above and I\nunderstand them. I represent that I will comply, whenever applicable, with the hazard insurance, leadbased paint, civil rights or other limitations in this notice. I further represent that all SBA loan proceeds\nwill be used only for business related purposes as specified in the loan application and, to the extent\nfeasible, to purchase only American-made equipment and products. I authorize the SBA Office of\nInspector General to request criminal record information about me from criminal justice agencies for the\npurpose of determining my eligibility for programs authorized by the Small Business Act, as amended.\n</p>\n<p>\n<b><u>CERTIFICATION AS TO ACCURACY:</u></b> I certify that the information provided in this application\nand the information that I have provided in all supporting documents and forms is true and accurate.\nI realize that the penalty for knowingly making a false statement to obtain a guaranteed loan from SBA is\nthat I may be fined up to $250,000 and/or be put in jail for up to 5 years under 18 USC § 1001 and if false\nstatements are submitted to a Federally insured institution, I may be fined up to $1,000,000 and/or be put in\njail for up to 30 years under 18 USC § 1014. \n</p>"
+         },
+         {
+          "type": "signaturepad",
+          "name": "Signature",
+          "titleLocation": "bottom",
+          "isRequired": true
+         },
+         {
+          "type": "text",
+          "name": "Print Name",
+          "titleLocation": "bottom",
+          "isRequired": true
+         },
+         {
+          "type": "text",
+          "name": "Date",
+          "isRequired": true,
+          "inputType": "date"
+         }
+        ]
+       }
+      ],
+      "showQuestionNumbers": "off"
+     }} />
+  )
+}
