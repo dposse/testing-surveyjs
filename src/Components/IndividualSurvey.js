@@ -1,10 +1,11 @@
+import React from "react";
 import * as Survey from "survey-react";
 import "survey-react/survey.css";
-import BorrowerInformationFormJSON from "../Surveys/BorrowerInformationForm.json";
 
-const IndividualSurvey = () => {
+
+const IndividualSurvey = ({ surveyJSON }) => {
   return (
-    <Survey.Survey json={BorrowerInformationFormJSON} />
+    <Survey.Survey json={surveyJSON} />
   )
 }
 

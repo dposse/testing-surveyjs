@@ -1,5 +1,5 @@
 import './App.css';
-import IndividualSurvey from "./Components/IndividualSurvey";
+import SurveyContainer from './Components/SurveyContainer';
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         Hi! We have some forms for you to fill out.
       </header>
-      <IndividualSurvey />
+      <SurveyContainer />
     </div>
   );
 }
