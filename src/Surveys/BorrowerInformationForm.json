@@ -428,6 +428,7 @@
       ]
      }
     ],
-    "showQuestionNumbers": "off"
+    "showQuestionNumbers": "off",
+    "showProgressBar": "top",
+    "progressBarType": "questions"
    }
-   
