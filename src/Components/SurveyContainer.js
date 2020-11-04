@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import IndividualSurvey from "./IndividualSurvey";
+import SurveyResult from "./SurveyResult";
 import BorrowerInformationFormJSON from "../Surveys/BorrowerInformationForm.json";
 
 const SurveyContainer = () => {
@@ -11,8 +12,6 @@ const SurveyContainer = () => {
 
   //if I had more time I would put the results in state management
   function saveResults(survey) {
-    console.log(survey);
-    console.log(survey.data);
     //right now I'm assuming SurveyJS is working as expected
     // with more time I'd probably make this a key/value pair to know if we somehow got the survey completed multiple times
     const updatedSurveyResults = [...surveyResults, survey.data];
@@ -23,9 +22,18 @@ const SurveyContainer = () => {
     return <div>No surveys to display.</div>
   }
 
-  return surveysToDisplay.map((survey, index) => (
-    <IndividualSurvey surveyJSON={survey} onComplete={saveResults} key={`survey${index}`} />
-  ))
+  return (
+    <>
+      {surveysToDisplay.map((survey, index) => (
+        <IndividualSurvey surveyJSON={survey} onComplete={saveResults} key={`survey${index}`} />
+      ))}
+      {surveyResults.map((surveyResult, index) => (
+        <SurveyResult result={surveyResult} key={`result${index}`} />
+      ))}
+    </>
+  )
+  
+    
 }
 
 export default SurveyContainer;
