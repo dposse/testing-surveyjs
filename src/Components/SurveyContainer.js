@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import IndividualSurvey from "./IndividualSurvey";
 import SurveyResult from "./SurveyResult";
 import BorrowerInformationFormJSON from "../Surveys/BorrowerInformationForm.json";
+import PersonalFinancialStatementJSON from "../Surveys/PersonalFinancialStatement.json";
 
 const SurveyContainer = () => {
   //for now importing JSON files and manually adding - I would love to figure out a way of getting all JSONs in a directory
   // maybe shell script would be better for that
   //  iterate through files in /Surveys, add import statement, add to useState?
-  const [surveysToDisplay] = useState([BorrowerInformationFormJSON]);
+  const [surveysToDisplay] = useState([BorrowerInformationFormJSON,PersonalFinancialStatementJSON]);
   const [surveyResults, setSurveyResults] = useState([]);
 
   //if I had more time I would put the results in state management
